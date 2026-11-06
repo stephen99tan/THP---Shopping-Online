@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/users', function () {
@@ -10,18 +11,12 @@ use Illuminate\Support\Facades\Route;
 
 // Categories
 
-Route::get('/categories', function () {
-    return [];
-});
+Route::get('/categories', [CategoryController::class, 'index']);
 
-Route::get('/categories/{id}', function () {
-    return [];
-});
+Route::get('/categories/{id}', [CategoryController::class, 'show']);
 
-Route::post('/categories', function () {
-    return [];
-});
+Route::post('/categories', [CategoryController::class, 'store']);
 
-Route::put('/categories/{id}', function () {
-    return [];
-});
+Route::put('/categories/{id}', [CategoryController::class, 'update']);
+
+Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
