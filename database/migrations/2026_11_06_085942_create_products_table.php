@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
-            $table->decimal('price', 10, 2);
-            $table->integer('stock');
+            $table->decimal('price', 10, 2)->default(0);
+            $table->integer('stock')->default(0);
             $table->timestamps();
         });
     }

@@ -24,11 +24,9 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        $category = $this->route('id');
-
         return [
             'name' => ['required', 'string', 'max:24'],
-            'slug' => ['required', 'string', 'max:28', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', Rule::unique('categories', 'slug')->ignore($category)],
+            'slug' => ['required', 'string', 'max:28', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', Rule::unique('categories', 'slug')->ignore($this->route('id'))],
         ];
     }
 
