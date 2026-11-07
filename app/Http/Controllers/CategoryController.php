@@ -7,14 +7,15 @@ use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class CategoryController extends Controller
 {
-    public function index(): JsonResponse
+    public function index(): AnonymousResourceCollection
     {
         $category = Category::orderBy('id')->get();
 
-        return response()->json($category);
+        return CategoryResource::collection($category);
     }
 
     public function show(int $id): JsonResponse

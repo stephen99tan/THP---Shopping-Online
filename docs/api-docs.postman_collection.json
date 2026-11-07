@@ -1,14 +1,229 @@
 {
   "info": {
+    "_postman_id": "368e25b6-1149-4ee3-9491-6ef9c9e7ee9b",
     "name": "THP API",
     "description": "Import into Postman: File > Import > select this file. Change `base_url` in collection Variables if server runs elsewhere.",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "21453659"
   },
-  "variable": [
-    { "key": "base_url", "value": "http://localhost:8000/api" },
-    { "key": "category_id", "value": "1" }
-  ],
   "item": [
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "List products",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/products?page=1&limit=10",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Show product",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/products/:product_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products",
+                ":product_id"
+              ],
+              "variable": [
+                {
+                  "key": "product_id",
+                  "value": "01a1b71e-8ddf-71be-bd47-9b9c53b100a8"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Coffee Mango Squash\",\n  \"slug\": \"coffee-mango-squash\",\n  \"category_id\": 1,\n  \"description\": \"Mango Squash flavor\",\n  \"price\": 499000,\n  \"stock\": 25\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/products",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update product",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Coffee Mango Squash\",\n  \"slug\": \"coffee-mango-squash\",\n  \"category_id\": 2,\n  \"description\": \"New Variant\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/products/:product_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products",
+                ":product_id"
+              ],
+              "variable": [
+                {
+                  "key": "product_id",
+                  "value": "01a1b66f-66e0-72ab-b53c-1baa7e3e1e30"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update product inventory",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price\": 599000,\n  \"stock\": 20\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/products/:product_id/inventory",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products",
+                ":product_id",
+                "inventory"
+              ],
+              "variable": [
+                {
+                  "key": "product_id",
+                  "value": "01a1b66f-66e0-72ab-b53c-1baa7e3e1e30"
+                }
+              ]
+            },
+            "description": "Only price and stock can be changed here. Both are required."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete product",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/products/:product_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products",
+                ":product_id"
+              ],
+              "variable": [
+                {
+                  "key": "product_id",
+                  "value": "",
+                  "description": "UUID of the product to delete."
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
     {
       "name": "Categories",
       "item": [
@@ -16,79 +231,170 @@
           "name": "List categories",
           "request": {
             "method": "GET",
-            "header": [{ "key": "Accept", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
               "raw": "{{base_url}}/categories",
-              "host": ["{{base_url}}"],
-              "path": ["categories"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categories"
+              ]
             }
-          }
+          },
+          "response": []
         },
         {
           "name": "Show category",
           "request": {
             "method": "GET",
-            "header": [{ "key": "Accept", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
-              "raw": "{{base_url}}/categories/{{category_id}}",
-              "host": ["{{base_url}}"],
-              "path": ["categories", "{{category_id}}"]
+              "raw": "{{base_url}}/categories/:category_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categories",
+                ":category_id"
+              ],
+              "variable": [
+                {
+                  "key": "category_id",
+                  "value": "12"
+                }
+              ]
             }
-          }
+          },
+          "response": []
         },
         {
           "name": "Create category",
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Accept", "value": "application/json" },
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Electronics\",\n  \"slug\": \"electronics\"\n}",
-              "options": { "raw": { "language": "json" } }
+              "raw": "{\n  \"name\": \"Coffee\",\n  \"slug\": \"coffee\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             },
             "url": {
               "raw": "{{base_url}}/categories",
-              "host": ["{{base_url}}"],
-              "path": ["categories"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categories"
+              ]
             }
-          }
+          },
+          "response": []
         },
         {
           "name": "Update category",
           "request": {
             "method": "PUT",
             "header": [
-              { "key": "Accept", "value": "application/json" },
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Electronics\",\n  \"slug\": \"electronics\"\n}",
-              "options": { "raw": { "language": "json" } }
+              "raw": "{\n  \"name\": \"Coffee\",\n  \"slug\": \"coffee\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             },
             "url": {
-              "raw": "{{base_url}}/categories/{{category_id}}",
-              "host": ["{{base_url}}"],
-              "path": ["categories", "{{category_id}}"]
+              "raw": "{{base_url}}/categories/:category_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categories",
+                ":category_id"
+              ],
+              "variable": [
+                {
+                  "key": "category_id",
+                  "value": "1"
+                }
+              ]
             }
-          }
+          },
+          "response": []
         },
         {
           "name": "Delete category",
           "request": {
             "method": "DELETE",
-            "header": [{ "key": "Accept", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
-              "raw": "{{base_url}}/categories/{{category_id}}",
-              "host": ["{{base_url}}"],
-              "path": ["categories", "{{category_id}}"]
+              "raw": "{{base_url}}/categories/:category_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categories",
+                ":category_id"
+              ],
+              "variable": [
+                {
+                  "key": "category_id",
+                  "value": "2"
+                }
+              ]
             }
-          }
+          },
+          "response": []
         }
       ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000/api"
+    },
+    {
+      "key": "category_id",
+      "value": "1"
     }
   ]
 }
